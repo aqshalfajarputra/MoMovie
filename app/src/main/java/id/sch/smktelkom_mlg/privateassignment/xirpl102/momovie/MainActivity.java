@@ -1,8 +1,7 @@
 package id.sch.smktelkom_mlg.privateassignment.xirpl102.momovie;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,8 +16,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import id.sch.smktelkom_mlg.privateassignment.xirpl102.momovie.adapter.SavedAdapter;
+import id.sch.smktelkom_mlg.privateassignment.xirpl102.momovie.item.SavedItemList;
+
 public class MainActivity extends AppCompatActivity {
 
+    ArrayList<SavedItemList> fList = new ArrayList<>();
+    SavedAdapter adapter;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -28,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -52,16 +57,10 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
     }
+
 
 
     @Override
@@ -80,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(MainActivity.this, ProfilesActivity.class));
             return true;
         }
 
@@ -133,31 +133,38 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            if (position == 0)
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PlaceholderFragment (defined as a static inner class below).
+
+            if (position == 0) {
                 return new PopularMoviesFragment();
-            else if (position == 1)
-                return new UpcomingMoviesFragment();
-            else if (position == 2)
+            } else if (position == 1) {
                 return new TopRatedMoviesFragment();
-            else
-                return PlaceholderFragment.newInstance(position + 1);
+            } else if (position == 2) {
+                return new UpcomingMoviesFragment();
+            } else {
+                return new SavedMoviesFragment();
+            }
         }
+
 
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 4;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Popular Movies ";
+                    return "Popular Movies";
                 case 1:
-                    return "Upcoming Movies";
-                case 2:
                     return "Top Rated Movies";
+                case 2:
+                    return "Upcoming Movies";
+                case 3:
+                    return "Saved Movies";
             }
             return null;
         }

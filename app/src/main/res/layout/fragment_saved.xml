@@ -2,15 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="id.sch.smktelkom_mlg.privateassignment.xirpl102.momovie.PopularMoviesFragment">
+    tools:context="id.sch.smktelkom_mlg.privateassignment.xirpl103.watchme.SavedFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewPopular"
+        android:id="@+id/recyclerViewSaved"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    </android.support.v7.widget.RecyclerView>
 
+    </android.support.v7.widget.RecyclerView>
 
 </FrameLayout>
